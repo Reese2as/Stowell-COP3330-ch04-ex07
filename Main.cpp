@@ -5,36 +5,75 @@
 #include <iostream>
 #include "std_lib_facilities.h"
 
+string Number(string in)
+{
+    transform(in.begin(), in.end(), in.begin(), ::tolower);
+
+    if (in == "zero" || in == "0")
+        return "0";
+    else if (in == "one" || in == "1")
+        return "1";
+    else if (in == "two" || in == "2")
+        return "2";
+    else if (in == "three" || in == "3")
+        return "3";
+    else if (in == "four" || in == "4")
+        return "4";
+    else if (in == "five" || in == "5")
+        return "5";
+    else if (in == "six" || in == "6")
+        return "6";
+    else if (in == "seven" || in == "7")
+        return "7";
+    else if (in == "eight" || in == "8")
+        return "8";
+    else if (in == "nine" || in == "9")
+        return "9";
+
+    return "100";
+}
+
 int main()
 {
-	string operation;
+	string operation, numstring, num2string;
 	double num = 0;
 	double num2 = 0;
-	cout << "Please enter 2 numbers seperated by a space followed by a basic calculator application +, -, *, / ";
+	cout << "Please enter 2 single digit numbers seperated by a space followed by a basic calculator application +, -, *, / ";
 	
-	while(cin >> num >> num2 >> operation) {			
+	while(cin >> numstring >> num2string >> operation) {			
 		double result = 0;
-		if(operation=="+")
-        { 
+		num = stod(Number(numstring));
+		num2 = stod(Number(num2string));
+
+		if (!(num == 100 || num2 == 100))
+		{
+			if(operation=="+")
+        {
             result = num + num2;
 			cout << "The sum of "<< num << " and " << num2 << " is " << result << '\n';
         }
-		else if (operation=="-")
+			else if (operation=="-")
         {
         	result = num - num2;
 			cout << "The difference of "<< num << " and " << num2 << " is " << result << '\n';
         }
-		else if (operation=="*")
+			else if (operation=="*")
         {
         	result = num * num2;
 			cout << "The product of "<< num << " and " << num2 << " is " << result << '\n';
         }
-		else if (operation=="/") 
+			else if (operation=="/") 
         {
 			if (num2==0) error("cant divide by zero");
 			result = num/num2;
 			cout << "The quotient of "<< num << " and " << num2 << " is " << result << '\n';
 		}
-		cout << "Please enter a new opperation ";
+			cout << "Please enter a new opperation ";
+		}
+		else
+		{
+			cout << "one of your numbers is not a single digit "<< '\n';
+			cout << "Please enter a new opperation ";
+		}
 	}
 }
